@@ -10,7 +10,7 @@
 <ul>
 {% for project in projects %}
     <li>
-        Project: {{project[0]}}<br>Grade:{{project[1]}}<br><br>
+        Project: <a href="/project?title={{project[0]}}">{{project[0]}}</a><br>Grade:{{project[1]}}<br><br>
     </li>
 
  {% endfor %}

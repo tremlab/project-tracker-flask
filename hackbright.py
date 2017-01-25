@@ -64,8 +64,8 @@ def get_project_by_title(title):
         """
     db_cursor = db.session.execute(QUERY, {'title': title})
     row = db_cursor.fetchone()
-    print "Title: %s\nDescription: %s\nMax Grade: %d" % (row[0], row[1],
-                                                         row[2])
+    # print "Title: %s\nDescription: %s\nMax Grade: %d" % (row[0], row[1],
+    #                                                      row[2])
     return row
 
 

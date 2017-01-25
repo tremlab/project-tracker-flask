@@ -35,10 +35,6 @@ def student_add():
     return render_template('student_add.html')
 
 
-
-
-
-
  
 @app.route("/student-confirm", methods=["POST"])
 def student_confirm():
@@ -54,6 +50,37 @@ def student_confirm():
         return render_template('student_confirm.html',
                         github=github)
 
+
+@app.route("/project")
+def get_project():
+    """Show information about a student."""
+
+    title_request = request.args.get('title') 
+    title, description, max_grade = hackbright.get_project_by_title(title_request)
+
+    # get name, grade by guthub......
+    # github, grade
+    githubs_and_grades = hackbright.get_grades_by_title(title)
+
+    student_grades = []
+
+    for github, grade in githubs_and_grades:
+        # github_and_grade = [github_and_grade]
+        student = hackbright.get_student_by_github(github)
+        name = student[0:2]
+        github_grade_names = (github, grade) + name
+        student_grades.append(github_grade_names)
+
+
+        # github_and_grade.append(name)
+    
+
+    html = render_template('project_info.html',
+                            title=title,
+                            description=description,
+                            max_grade=max_grade,
+                            student_grades=student_grades)
+    return html
 
 if __name__ == "__main__":
     hackbright.connect_to_db(app)
